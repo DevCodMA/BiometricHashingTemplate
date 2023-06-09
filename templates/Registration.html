@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+
+  <link href="{{url_for('static', filename='css/Reg.css')}}" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="title">Registration</div>
+    <br />
+    <div class="">
+      <form id="input-form" method="post" action="/registeruser">
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Full Name</span>
+            <input type="text" placeholder="Enter your name" name="fullname" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Email</span>
+            <input type="text" placeholder="Enter your email" name="emailid" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Phone Number</span>
+            <input type="text" placeholder="Enter your phone number" name="phoneno" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Account Number</span>
+            <input type="text" placeholder="Enter your account number" name="accno" required>
+          </div>
+          <div class="input-box" style="position:absolute; margin-left:350px;margin-top:-280px">
+            <video id="video" width="290" height="220" autoplay style="border: 2px solid rgba(0,0,0,0.5)"></video>
+          </div>
+          <input type="hidden" id="image-data" name="image-data">
+        </div>
+        <div class="button">
+          <input type="submit" value="Take Photo & Register" id="capture-btn">
+        </div>
+      </form>
+      <div align="center">
+        <a href="{{ url_for('loginpage') }}">Back to login</a>
+      </div>
+    </div>
+  </div>
+  {% if message %}
+  <script>
+    alert("{{ message }}");
+  </script>
+  {% endif %}
+  <script>
+    const video = document.getElementById('video');
+        const captureBtn = document.getElementById('capture-btn');
+        const imageInput = document.getElementById('image-data');
+
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
+            captureBtn.addEventListener('click', (event) => {
+              const canvas = document.createElement('canvas');
+              canvas.width = video.videoWidth;
+              canvas.height = video.videoHeight;
+              canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+              const dataUrl = canvas.toDataURL();
+              imageInput.value = dataUrl;
+              setTimeout(function(){
+                  $.ajax({
+                      url: '/registeruser',
+                      type: 'POST',
+                      data: $('#input-form').serialize(),
+                      success: function(response) {
+                      }
+                  });
+              }, 100);
+          });
+  </script>
+</body>
+
+</html>

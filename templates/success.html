@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Home</title>
+  <style>
+    /* Remove any padding and margin from the body */
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Make the iframe cover the entire page */
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      /* Remove the default iframe border */
+      z-index: 0;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem;
+      color: #fff;
+      z-index: 1;
+      background-color: #1976d2;
+      position: fixed;
+      width: 100%;
+    }
+
+    .navbar-left img {
+      height: 2rem;
+    }
+
+    .navbar-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-right .username {
+      margin-right: 1rem;
+      font-size:16px;
+      font-weight:bold;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      color: rgba(255,255,255, 0.7);
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar" style="background-color: rgb(15, 74, 138);-index: 10;">
+    <div class="navbar-left">
+      <a href="#"><img src="https://myaccount.tataplayfiber.co.in/Selfcare/prime_resources/images/1220356_paytm_icon_Final.png" alt="Paytm Icon"></a>
+    </div>
+    <div class="navbar-right">
+      <p class="username">Welcome {{name}}!</p>
+    </div>
+  </nav>
+  <iframe src="https://paytm-website-clone.vercel.app/"></iframe>
+</body>
+
+</html>

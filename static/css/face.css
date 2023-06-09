@@ -1,0 +1,8 @@
+body{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background: rgba(47, 49, 211, 0.9);
+}
